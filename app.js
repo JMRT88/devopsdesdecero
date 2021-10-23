@@ -1,3 +1,3 @@
 // app.js
 
-console.log("ok");
+console.log("ok")
