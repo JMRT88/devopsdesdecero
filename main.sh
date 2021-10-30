@@ -15,5 +15,7 @@ echo "lanzando pruebas de estres al servidor"
 sleep 10 
 echo "lanzando contenedores docker adicionales..."
 
-slepp 10
+exit -1
+
+slep 10
 echo "finalizando pruebas..."
