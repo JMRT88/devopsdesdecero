@@ -1,0 +1,46 @@
+version: "3"
+services:
+  web: 
+    image: oskrmarolv/devop:swarm
+    deploy:
+      replicas: 5
+      resources:
+        limits:
+          cpus: "0.1"
+          memory: 50M
+      restart_policy:
+        condition: on-failure
+    ports:
+      - "8080:80"
+    networks:
+      - webnet
+networks:
+  webnet:
+
+
+  #Lanzar ser docker swarm
+docker swarm init 
+
+#Lanzamiendo de servicio
+docker stack deploy -c docker-compose.yml ddos-ping-cluster
+
+#Aumentar nodos
+docker service scale ddos-ping-cluster=15
+
+#Inspección de cluster
+docker service inspect --pretty ddos-ping-cluster
+
+#Crear servicio
+docker service --create --replicas 5 --name ddos-ping-cluster oskrmarolv/devop:ping
+
+#Listar servicios
+docker service ls
+
+#Nodos asociado al servicio
+docker service ps ddos-ping-cluster
+
+#Nodos 
+docker service logs ddos-ping-cluster
+
+#Deterner el servicios 
+docker stack rm ddos-ping-cluster
